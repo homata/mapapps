@@ -18,3 +18,26 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+
+# for Rails
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+
+# HO Added
+.idea/
+.DS_Store
+00.SAVE/

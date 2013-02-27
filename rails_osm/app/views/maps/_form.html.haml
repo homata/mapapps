@@ -1,0 +1,41 @@
+= form_for @map do |f|
+  - if @map.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@map.errors.count, "error")} prohibited this map from being saved:"
+      %ul
+        - @map.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :latitude
+    = f.text_field :latitude
+  .field
+    = f.label :longitude
+    = f.text_field :longitude
+  .actions
+    = f.submit 'Save'
+
+%div#map
+:css
+  #map { height: 400px; }
+:javascript
+  L.Icon.Default.imagePath = "/assets";
+  var lat = $("#map_latitude").val()? $("#map_latitude").val() : 35.64483;
+  var lng = $("#map_longitude").val()? $("#map_longitude").val() : 139.40881;
+  var map = L.map('map').setView([lat, lng], 17);
+  var osmUrl = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+  var osmAttrib = "Map data © OpenStreetMap contributors";
+  L.tileLayer(osmUrl, {
+    attribution: osmAttrib,
+    maxZoom: 20,
+  }).addTo(map);
+  var marker = L.marker([lat, lng]).addTo(map);
+  map.on("click", function(e) {
+    marker.setLatLng(e.latlng);
+    $("#map_latitude").val(e.latlng.lat);
+    $("#map_longitude").val(e.latlng.lng);
+  });
+  
